@@ -1,20 +1,452 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="text-lg pr-4">
+    <ion-breadcrumbs
+      color="dave-blue"
+      class="hidden sm:flex Bauhaus text-lg"
+      slot="end"
+    >
+      <ion-breadcrumb
+        (click)="scrollToElement(home)"
+        color="dave-blue"
+        active="true"
+      >
+        <ion-text color="dave-blue">Home</ion-text>
+      </ion-breadcrumb>
+      <ion-breadcrumb (click)="scrollToElement(about)">
+        <ion-text color="dave-blue">About</ion-text>
+      </ion-breadcrumb>
+      <ion-breadcrumb (click)="scrollToElement(pricing)">
+        <ion-text color="dave-blue">Pricing</ion-text>
+      </ion-breadcrumb>
+      <ion-breadcrumb (click)="scrollToElement(contact)">
+        <ion-text color="dave-blue">Contact</ion-text>
+      </ion-breadcrumb>
+    </ion-breadcrumbs>
+    <div
+      (click)="displayMenu?displayMenu=false:displayMenu=true"
+      class="dots sm:hidden"
+      slot="end"
+    >
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 10 10"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          id="lineOne"
+          d="M8.1447 2.5341H1.8033C1.34248 2.5341 0.968903 2.81992 0.968903 3.1725C0.968903 3.52508 1.34248 3.8109 1.8033 3.8109H8.1447C8.60553 3.8109 8.9791 3.52508 8.9791 3.1725C8.9791 2.81992 8.60553 2.5341 8.1447 2.5341Z"
+          class="unChecked"
+          [ngClass]="{checked:  displayMenu}"
+        />
+        <path
+          id="lineTwo"
+          d="M8.1447 4.6133H1.8033C1.34248 4.6133 0.968903 4.89912 0.968903 5.2517C0.968903 5.60428 1.34248 5.8901 1.8033 5.8901H8.1447C8.60553 5.8901 8.9791 5.60428 8.9791 5.2517C8.9791 4.89912 8.60553 4.6133 8.1447 4.6133Z"
+          [ngClass]="{checked1:  displayMenu}"
+          class="unChecked"
+        />
+        <path
+          id="lineThree"
+          d="M8.1447 6.6924H1.8033C1.34248 6.6924 0.968903 6.97822 0.968903 7.3308C0.968903 7.68338 1.34248 7.9692 1.8033 7.9692H8.1447C8.60553 7.9692 8.9791 7.68338 8.9791 7.3308C8.9791 6.97822 8.60553 6.6924 8.1447 6.6924Z"
+          [ngClass]="{checked2:  displayMenu}"
+          class="unChecked"
+        />
+      </svg>
+    </div>
   </ion-toolbar>
 </ion-header>
+<ion-content
+  color="dave-white"
+  [scrollEvents]="true"
+  (ionScroll)="parallax($any($event))"
+>
+  <div
+    class="absolute bottom-[30%] top-1/4 left-0 right-0 bg-gradient-to-b from-white dark:from-black to-blue-600 -z-30"
+  ></div>
+  <div
+    class="absolute bottom-0 top-[68%] left-0 right-0 bg-blue-700 -z-30"
+  ></div>
+  <div
+    style="z-index: 9999999"
+    class="pointer-events-none fixed top-0 bottom-0 left-0 right-0"
+  >
+    <canvas #canvas></canvas>
+  </div>
+  <div
+    class="pointer-events-none fixed top-0 bottom-0 left-0 right-0 mt-[24vh] sm:mt-[27vh] -z-10"
+  >
+    <svg
+      width="100%"
+      viewBox="0 0 962 277"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="wholeLine">
+        <path
+          id="line5"
+          d="M3.60353 194.558C253.818 255.56 484.16 178.222 696.513 106.924C787.835 76.2623 875.84 46.7139 960.76 29.7008L961.524 33.4138C876.885 50.3706 789.045 79.8634 697.894 110.468C484.881 181.987 253.823 259.566 2.20322 198.221L3.60353 194.558Z"
+          fill="#001D64"
+        />
+        <path
+          id="line4"
+          d="M5.38029 152.637C251.234 223.063 482.607 154.15 695.911 90.6185C787.642 63.297 876.041 36.9677 960.907 23.0817L961.524 26.8302C876.939 40.6701 788.707 66.9499 697.148 94.22C483.181 157.948 251.087 227.077 3.85298 156.255L5.38029 152.637Z"
+          fill="#001D64"
+        />
+        <path
+          id="line3"
+          d="M3.86168 109.814C246.241 189.422 479.429 129.218 694.404 73.7164C786.855 49.8476 875.947 26.8457 961.05 16.1489L961.524 19.9182C876.703 30.5799 787.778 53.5387 695.502 77.3625C479.857 133.037 245.944 193.428 2.20322 113.373L3.86168 109.814Z"
+          fill="#001D64"
+        />
+        <path
+          id="line2"
+          d="M2.51275 66.1876C241.391 154.726 476.345 103.403 692.95 56.0891C786.101 35.7413 875.868 16.1327 961.193 8.65298L961.524 12.4325C876.482 19.8873 786.884 39.4592 693.908 59.7685C476.63 107.23 240.944 158.713 0.724289 69.6769L2.51275 66.1876Z"
+          fill="#001D64"
+        />
+        <path
+          id="line"
+          d="M4.1731 21.7623C238.658 118.847 474.474 76.5548 691.873 37.566C785.365 20.7985 875.462 4.63988 960.682 0.38942L960.87 4.16441C875.932 8.40088 786.006 24.5289 692.689 41.2646C474.614 80.3748 238.063 122.799 2.2618 25.1691L4.1731 21.7623Z"
+          fill="#001D64"
+        />
+        <path
+          id="trouser"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M138.764 61.5769L161.979 68.1136C177.712 118.89 199.166 161.1 208.641 219.386C233.415 174.986 246.115 126.546 253.469 76.3885L277.002 81.5657C286.834 161.628 268.299 203.307 245.334 275.802C197.304 279.317 196.21 265.935 161.321 269.45C171.325 186.391 146.283 130.868 138.764 61.5769Z"
+          fill="#FF6600"
+        >
+          <animate
+            attributeName="d"
+            dur="8s"
+            keySplines="0.14 0.74 0.25 0.81"
+            repeatCount="indefinite"
+            values="M138.764 61.5769L161.979 68.1136C177.712 118.89 199.166 161.1 208.641 219.386C233.415 174.986 246.115 126.546 253.469 76.3885L277.002 81.5657C286.834 161.628 268.299 203.307 245.334 275.802C197.304 279.317 196.21 265.935 161.321 269.45C171.325 186.391 146.283 130.868 138.764 61.5769Z;M138.764 61.5769L161.979 68.1136C177.712 118.89 213.674 157.733 223.148 216.019C247.922 171.619 246.115 126.546 253.469 76.3885L277.002 81.5657C286.834 161.628 285.444 195.394 262.479 267.889C218.405 245.027 203.188 273.692 178.466 261.537C188.47 178.478 146.283 130.868 138.764 61.5769Z;M138.764 61.5769L161.979 68.1136C177.712 118.89 199.166 161.1 208.641 219.386C233.415 174.986 246.115 126.546 253.469 76.3885L277.002 81.5657C286.834 161.628 268.299 203.307 245.334 275.802C197.304 279.317 196.21 265.935 161.321 269.45C171.325 186.391 146.283 130.868 138.764 61.5769Z"
+          />
+        </path>
+        <!-- <path
+          id="trouserCopy"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M138.764 61.5769L161.979 68.1136C177.712 118.89 213.674 157.733 223.148 216.019C247.922 171.619 246.115 126.546 253.469 76.3885L277.002 81.5657C286.834 161.628 285.444 195.394 262.479 267.889C218.405 245.027 203.188 273.692 178.466 261.537C188.47 178.478 146.283 130.868 138.764 61.5769Z"
+          fill="#FF00FF"
+        /> -->
+        <path
+          id="peg6"
+          d="M153.072 53.0512L145.094 53.852L148.057 83.3707L156.035 82.5699L153.072 53.0512Z"
+          fill="#990099"
+        />
+        <path
+          id="peg5"
+          d="M269.731 65.1128L259.611 64.5477L257.941 93.8877L268.061 94.4529L269.731 65.1128Z"
+          fill="#006633"
+        />
+        <path
+          id="shirt"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M405.911 78.1358C402.121 97.8086 398.331 117.481 394.54 137.154C401.257 136.597 407.973 136.039 414.689 135.482C415.433 144.444 409.293 149.025 416.921 162.368C410.205 162.926 403.489 163.483 396.773 164.041C387.708 159.508 378.401 154.836 370.515 158.055C363.41 160.955 355.511 162.039 348.445 168.401L321.579 170.631C320.594 158.768 326.975 152.707 319.347 143.745C325.392 143.243 331.437 142.741 337.481 142.239C334.795 121.871 332.108 101.503 329.422 81.136C328.333 76.1776 347.152 81.37 360.413 80.5052C380.228 79.2134 398.422 73.9776 405.911 78.1358Z"
+          fill="#6666FF"
+        >
+          <animate
+            attributeName="d"
+            dur="8s"
+            repeatCount="indefinite"
+            keySplines="0.14 0.74 0.25 0.81"
+            values="M405.911 78.1358C402.121 97.8086 411.045 112.714 407.255 132.387C413.971 131.83 419.27 134.49 425.986 133.933C426.73 142.895 429.494 147.206 428.218 160.819C421.502 161.377 414.869 163.347 408.07 162.492C395.497 160.387 391.492 155.615 381.812 156.506C372.872 157.329 366.808 160.489 359.742 166.852L332.876 169.082C331.891 157.219 328.829 153.855 330.644 142.195C336.689 141.693 338.417 138.224 344.461 137.722C341.775 117.354 332.108 101.503 329.422 81.136C328.333 76.1776 347.152 81.37 360.413 80.5052C380.228 79.2134 398.422 73.9776 405.911 78.1358Z;M405.911 78.1358C402.121 97.8086 398.331 117.481 394.54 137.154C401.257 136.597 407.973 136.039 414.689 135.482C415.433 144.444 409.293 149.025 416.921 162.368C410.205 162.926 403.489 163.483 396.773 164.041C387.708 159.508 378.401 154.836 370.515 158.055C363.41 160.955 355.511 162.039 348.445 168.401L321.579 170.631C320.594 158.768 326.975 152.707 319.347 143.745C325.392 143.243 331.437 142.741 337.481 142.239C334.795 121.871 332.108 101.503 329.422 81.136C328.333 76.1776 347.152 81.37 360.413 80.5052C380.228 79.2134 398.422 73.9776 405.911 78.1358Z;M405.911 78.1358C402.121 97.8086 411.045 112.714 407.255 132.387C413.971 131.83 419.27 134.49 425.986 133.933C426.73 142.895 429.494 147.206 428.218 160.819C421.502 161.377 414.869 163.347 408.07 162.492C395.497 160.387 391.492 155.615 381.812 156.506C372.872 157.329 366.808 160.489 359.742 166.852L332.876 169.082C331.891 157.219 328.829 153.855 330.644 142.195C336.689 141.693 338.417 138.224 344.461 137.722C341.775 117.354 332.108 101.503 329.422 81.136C328.333 76.1776 347.152 81.37 360.413 80.5052C380.228 79.2134 398.422 73.9776 405.911 78.1358Z"
+          />
+        </path>
+        <!-- <path
+          id="shirtCopy"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M405.911 78.1358C402.121 97.8086 411.045 112.714 407.255 132.387C413.971 131.83 419.27 134.49 425.986 133.933C426.73 142.895 429.494 147.206 428.218 160.819C421.502 161.377 414.869 163.347 408.07 162.492C395.497 160.387 391.492 155.615 381.812 156.506C372.872 157.329 366.808 160.489 359.742 166.852L332.876 169.082C331.891 157.219 328.829 153.855 330.644 142.195C336.689 141.693 338.417 138.224 344.461 137.722C341.775 117.354 332.108 101.503 329.422 81.136C328.333 76.1776 347.152 81.37 360.413 80.5052C380.228 79.2134 398.422 73.9776 405.911 78.1358Z"
+          fill="#993366"
+        /> -->
+        <path
+          id="peg3"
+          d="M392.675 62.3492L382.833 63.1663L385.288 92.7316L395.129 91.9146L392.675 62.3492Z"
+          fill="#FF0066"
+        />
+        <path
+          id="peg4"
+          d="M342.97 67.1534L333.129 67.9704L335.583 97.5357L345.425 96.7187L342.97 67.1534Z"
+          fill="#FFFF00"
+        />
+        <path
+          id="shot"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M441.073 75.2509L459.62 73.5947C465.804 84.8861 474.312 91.8388 478.174 107.47C478.801 94.836 479.427 82.2022 480.053 69.5684L502.911 67.8596C505.823 85.2833 512.492 98.9523 511.65 120.131C501.69 121.747 490.034 119.191 481.769 124.979C466.806 135.458 460.603 128.413 450.021 130.13C452.658 109.835 444.069 92.4164 441.073 75.2509H441.073Z"
+          fill="#0000FF"
+        >
+          <animate
+            attributeName="d"
+            dur="8s"
+            repeatCount="indefinite"
+            values="M441.073 75.2509L459.62 73.5947C465.804 84.8861 474.312 91.8388 478.174 107.47C478.801 94.836 479.427 82.2022 480.053 69.5684L502.911 67.8596C505.823 85.2833 512.492 98.9523 511.65 120.131C501.69 121.747 490.034 119.191 481.769 124.979C466.806 135.458 460.603 128.413 450.021 130.13C452.658 109.835 444.069 92.4164 441.073 75.2509H441.073Z;M441.073 75.2509L459.62 73.5947C465.804 84.8861 475.674 82.4452 479.536 98.0762C480.163 85.4424 479.427 82.2022 480.053 69.5684L502.911 67.8596C505.823 85.2833 515.068 93.4656 514.226 114.644C504.266 116.26 496.386 128.004 484.345 119.493C469.429 108.949 465.997 122.171 455.415 123.888C458.052 103.593 441.64 96.1936 441.073 75.2509H441.073Z;M441.073 75.2509L459.62 73.5947C465.804 84.8861 474.312 91.8388 478.174 107.47C478.801 94.836 479.427 82.2022 480.053 69.5684L502.911 67.8596C505.823 85.2833 512.492 98.9523 511.65 120.131C501.69 121.747 490.034 119.191 481.769 124.979C466.806 135.458 460.603 128.413 450.021 130.13C452.658 109.835 444.069 92.4164 441.073 75.2509H441.073Z"
+            keySplines="0.14 0.74 0.25 0.81"
+          />
+        </path>
+        <!-- <path
+          id="shotCopy"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M441.073 75.2509L459.62 73.5947C465.804 84.8861 475.674 82.4452 479.536 98.0762C480.163 85.4424 479.427 82.2022 480.053 69.5684L502.911 67.8596C505.823 85.2833 515.068 93.4656 514.226 114.644C504.266 116.26 496.386 128.004 484.345 119.493C469.429 108.949 465.997 122.171 455.415 123.888C458.052 103.593 441.64 96.1936 441.073 75.2509H441.073Z"
+          fill="#349425"
+        /> -->
+        <path
+          id="peg2"
+          d="M452.956 60.6599L442.951 62.2834L447.702 91.5674L457.707 89.944L452.956 60.6599Z"
+          fill="#33CC33"
+        />
+        <path
+          id="peg0"
+          d="M496.148 57.8389L486.143 59.4623L490.894 88.7464L500.9 87.1229L496.148 57.8389Z"
+          fill="#CE502A"
+        />
+      </g>
+    </svg>
+  </div>
+  <section #home class="grid sm:grid-cols-2">
+    <img
+      class="self-start justify-self-center w-[60%] sm:ml-auto sm:mr-0 mb-[5vh]"
+      src="assets/blue laundry logo.svg"
+      alt=""
+      #logo
+    />
+    <div #landingContainer class="relative sm:mt-[14vh]">
+      <img
+        class="ml-auto mr-0 sm:mr-[10vw] w-[80vw] sm:w-[40vw]"
+        src="assets/madam-t.png"
+        alt=""
+      />
+      <img
+        class="absolute -bottom-10 right-0 w-[60vw] sm:w-[40vw]"
+        src="assets/washingMachine.png"
+        alt=""
+      />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <img
+        class="absolute -bottom-10 w-[25vw] sm:w-[20vw] right-10"
+        src="assets/clothes-in-busket.png"
+        alt=""
+      />
+      <a
+        target="_blank"
+        [href]="'https://wa.me/254758336165?text=' + requestOrderMessageGen()"
+      >
+        <ion-button
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 sm:hidden"
+          color="dave-blue"
+        >
+          Request Service
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-button>
+      </a>
+      <a
+        target="_blank"
+        [href]="'https://wa.me/254758336165?text=' + requestOrderMessageGen()"
+      >
+        <ion-button
+          size="large"
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 hidden sm:block"
+          color="dave-blue"
+        >
+          Request Service
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-button>
+      </a>
+    </div>
+  </section>
+  <section #about class="bg-[#001D64] py-12 px-8">
+    <div
+      class="ion-padding bg-slate-200 z-50 montserrat p-6 rounded-lg shadow-lg"
+    >
+      <h1
+        class="text-blue-700 text-3xl font-extrabold text-center Bauhaus uppercase tracking-wide mb-4"
+      >
+        About Us
+      </h1>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <p class="text-black text-lg leading-relaxed">
+        Welcome to
+        <span class="font-bold text-blue-900">Blue Laundry Kilifi</span>—your
+        go-to laundry service in Kilifi, Kenya. Life gets busy, and we get it!
+        That’s why we offer
+        <span class="font-semibold">**free pickup and delivery**</span>, so you
+        can enjoy fresh, clean clothes without the hassle.
+      </p>
+
+      <p class="text-black mt-4 text-lg leading-relaxed">
+        Our expert team uses
+        <span class="font-semibold text-blue-900"
+          >state-of-the-art equipment</span
+        >
+        and
+        <span class="font-semibold text-blue-900">eco-friendly detergents</span>
+        to give your fabrics the care they deserve. Whether it’s your everyday
+        outfits, delicate garments, or bulky linens, we ensure a
+        <span class="italic font-semibold">gentle yet thorough</span> clean that
+        preserves quality and extends lifespan.
+      </p>
+
+      <p class="text-black mt-4 text-lg leading-relaxed">
+        At <span class="font-bold text-blue-900">Blue Laundry Kilifi</span>,
+        **your satisfaction is our top priority**. We take pride in: ✨
+        <span class="font-semibold">Fast turnaround times</span> ✨
+        <span class="font-semibold">Competitive pricing</span> ✨
+        <span class="font-semibold">Personalized service</span>
+
+        Experience effortless laundry care with us—because your time is
+        precious, and your clothes deserve the best.
+      </p>
+    </div>
+  </section>
+  <section #pricing>
+    <section class="ion-padding bg-slate-200 bg-opacity-50 z-50 montserrat">
+      <h1 class="text-black text-2xl font-bold text-center mb-6 Bauhaus">
+        Pricing
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
+        <!-- General Laundry Card -->
+        <div class="bg-white shadow-lg rounded-xl p-6 text-center appear">
+          <h2 class="text-blue-400 font-semibold">General Laundry</h2>
+          <div class="flex justify-center items-center my-2">
+            <img
+              src="assets/icon/laundry.png"
+              alt="Laundry Icon"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-gray-600">Perfect for everyday clothes</p>
+          <p class="text-black font-bold text-lg mt-2">Ksh 250/kg</p>
+        </div>
+
+        <!-- Wedding Dress Card -->
+        <div class="bg-white shadow-lg rounded-xl p-6 text-center appear">
+          <h2 class="text-blue-600 font-semibold">Wedding Dress</h2>
+          <div class="flex justify-center items-center my-2">
+            <img
+              src="assets/icon/woman.png"
+              alt="Wedding Dress Icon"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-gray-600">Professional cleaning for wedding gowns</p>
+          <p class="text-black font-bold text-lg mt-2">Ksh 2,000</p>
+        </div>
+
+        <!-- Assorted per 9kg -->
+        <div class="bg-white shadow-lg rounded-xl p-6 text-center appear">
+          <h2 class="text-blue-600 font-semibold">Assorted (9kg bundle)</h2>
+          <div class="flex justify-center items-center my-2">
+            <img
+              src="assets/icon/assorted.png"
+              alt="Assorted Laundry Icon"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-gray-600">Bulk laundry at a discounted rate</p>
+          <p class="text-black font-bold text-lg mt-2">Ksh 2,000</p>
+        </div>
+
+        <!-- Ironing & Steaming -->
+        <div class="bg-white shadow-lg rounded-xl p-6 text-center appear">
+          <h2 class="text-blue-600 font-semibold">Ironing & Steaming</h2>
+          <div class="flex justify-center items-center my-2">
+            <img
+              src="assets/icon/iron.png"
+              alt="Ironing Icon"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-gray-600">Keep your clothes wrinkle-free</p>
+          <p class="text-black font-bold text-lg mt-2">Ksh 50 per item</p>
+        </div>
+
+        <!-- Duvet Cleaning -->
+        <div class="bg-white shadow-lg rounded-xl p-6 text-center appear">
+          <h2 class="text-blue-600 font-semibold">Duvet Cleaning</h2>
+          <div class="flex justify-center items-center my-2">
+            <img
+              src="assets/icon/furniture.png"
+              alt="Duvet Icon"
+              class="w-8 h-8"
+            />
+          </div>
+          <p class="text-gray-600">Deep cleaning for all duvet sizes</p>
+          <p class="text-black font-bold text-lg mt-2">Ksh 600</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <footer #contact class="bg-[#001D64] text-black text-center p-4 px-24 mt-4">
+    <div class="ion-pading">
+      <p class="text-blue-400">Contact us: +254 758 336 165</p>
+      <a
+        target="_blank"
+        [href]="'https://wa.me/254758336165?text=' + requestOrderMessageGen()"
+      >
+        <ion-button color="dave-blue">
+          Request Service
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </ion-button>
+      </a>
+    </div>
+    <div class="ion-padding"></div>
+    <p>&copy; 2025 Blue Laundry Kilifi. All Rights Reserved.</p>
+    <br />
+    <p>Powered By</p>
+    <a target="_blank" [href]="'https://pwejar.com'">
+      <div class="p-4 mx-auto bg-white dark:bg-black rounded max-w-[200px]">
+        <img src="assets/pwejar_logo_full_slogan.svg" alt="" />
+      </div>
+    </a>
+  </footer>
+  <div
+    class="backdrop-blur-xl w-full h-[100vh] fixed top-0 unChecked sm:hidden pt-10"
+    [ngClass]="{off: !displayMenu}"
+    (click)="displayMenu=false"
+  >
+    <div class="relative ion-padding">
+      <img
+        class="self-start justify-self-center w-[60%] sm:ml-auto sm:mr-0 mb-[5vh]"
+        src="assets/blue laundry logo.svg"
+        alt=""
+      />
+      <h1
+        class="menuButton"
+        (click)="scrollToElement(home)"
+        [ngClass]="{buttonOff: !displayMenu}"
+        style="transition: all 0.3s 0s ease-in-out"
+      >
+        Home
+      </h1>
+      <h1
+        class="menuButton"
+        (click)="scrollToElement(about)"
+        [ngClass]="{buttonOff: !displayMenu}"
+        style="transition: all 0.3s 0.05s ease-in-out"
+      >
+        About
+      </h1>
+      <h1
+        class="menuButton"
+        [ngClass]="{buttonOff: !displayMenu}"
+        (click)="scrollToElement(pricing)"
+        style="transition: all 0.3s 0.1s ease-in-out"
+      >
+        Pricing
+      </h1>
+      <h1
+        (click)="scrollToElement(contact)"
+        class="menuButton"
+        [ngClass]="{buttonOff: !displayMenu}"
+        style="transition: all 0.3s 0.15s ease-in-out"
+      >
+        Contact
+      </h1>
+    </div>
   </div>
 </ion-content>

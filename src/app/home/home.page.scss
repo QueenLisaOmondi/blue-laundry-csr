@@ -25,3 +25,56 @@
 #container a {
   text-decoration: none;
 }
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+  // color: #b1b3ff07;
+  // color: #0436ff33;
+}
+.unChecked {
+  fill: #3e4095;
+  transition: all 0.3s ease;
+}
+.checked {
+  fill: #ff6600;
+  transform: rotate(45deg) translateY(20%);
+  transform-origin: center;
+}
+.checked1 {
+  fill: #ff6600;
+  transform: translateX(10vw);
+  transform-origin: center;
+  opacity: 0;
+}
+.checked2 {
+  fill: #ff6600;
+  transform: rotate(-45deg) translateY(-20%);
+  transform-origin: center;
+}
+.off {
+  opacity: 0;
+  pointer-events: none;
+}
+.menuButton {
+  background-color: #3e4095;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  :hover {
+    background-color: #3e4095;
+  }
+}
+ion-toolbar {
+  --background: transparent;
+}
+.log {
+  transform: translateY(-100%);
+}
+.buttonOff {
+  opacity: 0;
+  transform: translateY(100%);
+}
